@@ -1,77 +1,61 @@
 import PropTypes from 'prop-types';
 import styles from './Todo.module.css';
 import { useState } from 'react';
+import { MdOutlineEdit, MdOutlineDelete, MdDone } from 'react-icons/md';
+import { Button } from 'components/Button/Button';
+import { useDeleteTodo } from 'hooks/useDeleteTodo';
+import { useCompleteTodo } from 'hooks/useCompleteTodo';
+import { useEditTodo } from 'hooks/useEditTodo';
 
 export const Todo = ({ id, title, completed, setTodos }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState('');
+  const { deleteTodo } = useDeleteTodo(setTodos);
+  const { completeTodo } = useCompleteTodo(completed, setTodos);
+  const { editTodo, confirmEditTodo } = useEditTodo(
+    title,
+    text,
+    setText,
+    setIsEditing,
+    setTodos,
+  );
 
-  const changeCompleted = (id) => {
-    fetch(`http://localhost:3000/todos/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        completed: !completed,
-      }),
-    })
-      .then((rawResponse) => rawResponse.json())
-      .then((updatedTodo) =>
-        setTodos((prev) => prev.map((todo) => (todo.id === id ? updatedTodo : todo))),
-      );
-  };
-  const editTask = () => {
-    setIsEditing(true);
-    setText(title);
-  };
-  const confirmEditTask = (id) => {
-    fetch(`http://localhost:3000/todos/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        title: text,
-      }),
-    })
-      .then((rawResponse) => rawResponse.json())
-      .then((updatedTodo) => {
-        setTodos((prev) => prev.map((todo) => (todo.id === id ? updatedTodo : todo)));
-        setIsEditing(false);
-      });
-  };
-  const deleteTask = (id) => {
-    fetch(`http://localhost:3000/todos/${id}`, {
-      method: 'DELETE',
-    }).then(() => {
-      setTodos((prev) => prev.filter((todo) => todo.id !== id));
-      // setIsEditing(false);
-    });
-  };
   return (
     <div className={styles.container}>
-      <input
-        type="checkbox"
-        id={id}
-        checked={completed}
-        onChange={() => changeCompleted(id)}
-      />
-
-      {isEditing ? (
+      <div className={styles.todo}>
         <input
-          type="text"
-          name="edit-task"
-          value={text}
-          onChange={({ target }) => setText(target.value)}
+          type="checkbox"
+          id={id}
+          checked={completed}
+          onChange={() => completeTodo(id)}
         />
-      ) : (
-        <label>{title}</label>
-      )}
 
-      {isEditing ? (
-        <button onClick={() => confirmEditTask(id)}>Подтвердить</button>
-      ) : (
-        <button onClick={editTask}>Редактировать</button>
-      )}
+        {isEditing ? (
+          <input
+            type="text"
+            name="edit-todo"
+            value={text}
+            onChange={({ target }) => setText(target.value)}
+          />
+        ) : (
+          <label>{title}</label>
+        )}
+      </div>
+      <div className={styles.buttons}>
+        {isEditing ? (
+          <Button onClick={() => confirmEditTodo(id)}>
+            <MdDone />
+          </Button>
+        ) : (
+          <Button onClick={editTodo}>
+            <MdOutlineEdit />
+          </Button>
+        )}
 
-      <button onClick={() => deleteTask(id)}>Удалить</button>
+        <Button onClick={() => deleteTodo(id)}>
+          <MdOutlineDelete />
+        </Button>
+      </div>
     </div>
   );
 };

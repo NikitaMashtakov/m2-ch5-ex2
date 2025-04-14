@@ -1,4 +1,4 @@
-export const useAddTodo = ({ setTodos, text }) => {
+export const useAddTodo = (setTodos, text) => {
   const addTodo = () => {
     fetch('http://localhost:3000/todos', {
       method: 'POST',
@@ -10,7 +10,7 @@ export const useAddTodo = ({ setTodos, text }) => {
     })
       .then((rawResponse) => rawResponse.json())
       .then((newTodo) => {
-        setTodos((prev) => [...prev, newTodo]);
+        setTodos((prev) => [newTodo, ...prev]);
       })
       .catch((err) => console.log(err));
   };

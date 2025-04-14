@@ -1,28 +1,21 @@
 import { useState } from 'react';
 import styles from './Input.module.css';
-// import { useAddTodo } from '../../hooks/useAddTodo';
 import PropTypes from 'prop-types';
+import { MdAdd } from 'react-icons/md';
+import { Button } from 'components/Button/Button';
+import { useAddTodo } from 'hooks/useAddTodo';
 
 export const Input = ({ setTodos }) => {
   const [text, setText] = useState('');
-  // const { addTodo } = useAddTodo(setTodos, text);
-  const addTodo = () => {
-    fetch('http://localhost:3000/todos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        title: text,
-        completed: false,
-      }),
-    })
-      .then((rawResponse) => rawResponse.json())
-      .then((newTodo) => {
-        setTodos((prev) => [newTodo, ...prev]);
-      })
-      .catch((err) => console.log(err));
+  const { addTodo } = useAddTodo(setTodos, text);
+
+  const onAddClick = () => {
+    addTodo();
+    setText('');
   };
+
   return (
-    <>
+    <div className={styles.container}>
       <input
         className={styles.input}
         type="text"
@@ -31,22 +24,20 @@ export const Input = ({ setTodos }) => {
         onChange={({ target }) => setText(target.value)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' && text) {
-            addTodo();
-            setText('');
+            onAddClick();
           }
         }}
       />
-      <button
+      <Button
         onClick={() => {
           if (text) {
-            addTodo();
-            setText('');
+            onAddClick();
           }
         }}
       >
-        Добавить
-      </button>
-    </>
+        <MdAdd />
+      </Button>
+    </div>
   );
 };
 Input.propTypes = {

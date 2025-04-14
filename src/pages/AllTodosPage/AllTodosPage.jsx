@@ -1,30 +1,43 @@
 import { useEffect, useState } from 'react';
 import { TodoList } from 'components/TodoList/TodoList';
 import { Input } from 'components/Input/Input';
-import { SearchBar } from 'components/SearchBar/SearchBar';
-import useDebounce from 'hooks/useDebounce';
+import useDebouncedValue from 'hooks/useDebouncedValue';
+import { Header } from 'components/Header/Header';
+import { Selector } from 'components/Selector/Selector';
+import { OPTIONS } from 'constants/sortingOptions';
+import styles from './AllTodoPage.module.css';
 
 const AllTodoPage = () => {
   const [todos, setTodos] = useState([]);
   const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search, 250);
+  const [selectedSort, setSelectedSort] = useState('_sort=id&_order=desc');
+  const debouncedSearch = useDebouncedValue(search, 250);
 
   useEffect(() => {
-    fetch('http://localhost:3000/todos?_sort=id&_order=desc')
+    fetch(`http://localhost:3000/todos?${selectedSort}`)
       .then((response) => response.json())
       .then((loadedData) => {
         setTodos(loadedData);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [selectedSort]);
 
   return (
-    <>
-      <h1>Список дел:</h1>
+    <div className={styles.container}>
+      <Header search={search} setSearch={setSearch} />
+
       <Input setTodos={setTodos} />
-      <SearchBar search={search} setSearch={setSearch} />
+
+      <Selector
+        label={'Сортировка'}
+        selectorId={'sortingSelector'}
+        options={OPTIONS}
+        selected={selectedSort}
+        setSelected={setSelectedSort}
+      />
+
       <TodoList todos={todos} setTodos={setTodos} debouncedSearch={debouncedSearch} />
-    </>
+    </div>
   );
 };
 

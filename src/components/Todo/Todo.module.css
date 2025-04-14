@@ -2,8 +2,24 @@
   display: flex;
   gap: 5px;
   padding: 5px;
-  border-radius: 5px;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
   &:hover {
     background-color: #d8d8d8;
   }
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  font-size: 1.3rem;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
 }
