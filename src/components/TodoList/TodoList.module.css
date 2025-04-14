@@ -2,5 +2,5 @@
   width: 80%;
   margin: auto;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }

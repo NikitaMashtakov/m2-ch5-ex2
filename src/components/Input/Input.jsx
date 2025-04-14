@@ -17,7 +17,7 @@ export const Input = ({ setTodos }) => {
     })
       .then((rawResponse) => rawResponse.json())
       .then((newTodo) => {
-        setTodos((prev) => [...prev, newTodo]);
+        setTodos((prev) => [newTodo, ...prev]);
       })
       .catch((err) => console.log(err));
   };
@@ -29,6 +29,12 @@ export const Input = ({ setTodos }) => {
         value={text}
         placeholder="Новая задача..."
         onChange={({ target }) => setText(target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && text) {
+            addTodo();
+            setText('');
+          }
+        }}
       />
       <button
         onClick={() => {

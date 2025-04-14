@@ -1,18 +1,19 @@
-import { Task } from '../Task/Task';
+import { Todo } from 'components/Todo/Todo';
 import PropTypes from 'prop-types';
-import styles from './TaskList.module.css';
-export const TaskList = ({ todos, setTodos, search }) => {
+import styles from './TodoList.module.css';
+export const TodoList = ({ todos, setTodos, debouncedSearch }) => {
   return (
     <div className={styles.container}>
       {todos
-        .filter(({ title }) => title.toLowerCase().includes(search.toLowerCase()))
+        .filter(({ title }) =>
+          title.toLowerCase().includes(debouncedSearch.toLowerCase()),
+        )
         .map(({ id, title, completed }) => (
-          <Task
+          <Todo
             key={id}
             id={id}
             title={title}
             completed={completed}
-            todos={todos}
             setTodos={setTodos}
           />
         ))}
@@ -20,8 +21,8 @@ export const TaskList = ({ todos, setTodos, search }) => {
   );
 };
 
-TaskList.propTypes = {
+TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object),
   setTodos: PropTypes.func,
-  search: PropTypes.string,
+  debouncedSearch: PropTypes.string,
 };

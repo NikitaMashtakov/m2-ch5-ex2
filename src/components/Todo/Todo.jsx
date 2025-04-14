@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import styles from './Task.module.css';
+import styles from './Todo.module.css';
 import { useState } from 'react';
-export const Task = ({ id, title, completed, setTodos }) => {
+
+export const Todo = ({ id, title, completed, setTodos }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState('');
 
@@ -75,7 +76,7 @@ export const Task = ({ id, title, completed, setTodos }) => {
   );
 };
 
-Task.propTypes = {
+Todo.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   completed: PropTypes.bool,
