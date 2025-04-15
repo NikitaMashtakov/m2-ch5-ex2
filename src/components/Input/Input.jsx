@@ -3,14 +3,14 @@ import styles from './Input.module.css';
 import PropTypes from 'prop-types';
 import { MdAdd } from 'react-icons/md';
 import { Button } from 'components/Button/Button';
-import { useAddTodo } from 'hooks/useAddTodo';
+import { addTodo } from 'utils/addTodo';
 
 export const Input = ({ setTodos }) => {
   const [text, setText] = useState('');
-  const { addTodo } = useAddTodo(setTodos, text);
+  const { add } = addTodo(setTodos, text);
 
   const onAddClick = () => {
-    addTodo();
+    add();
     setText('');
   };
 

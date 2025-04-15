@@ -1,5 +1,5 @@
-export const useAddTodo = (setTodos, text) => {
-  const addTodo = () => {
+export const addTodo = (setTodos, text) => {
+  const add = () => {
     fetch('http://localhost:3000/todos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -14,5 +14,5 @@ export const useAddTodo = (setTodos, text) => {
       })
       .catch((err) => console.log(err));
   };
-  return { addTodo };
+  return { add };
 };

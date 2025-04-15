@@ -3,8 +3,7 @@ import { TodoList } from 'components/TodoList/TodoList';
 import { Input } from 'components/Input/Input';
 import useDebouncedValue from 'hooks/useDebouncedValue';
 import { Header } from 'components/Header/Header';
-import { Selector } from 'components/Selector/Selector';
-import { OPTIONS } from 'constants/sortingOptions';
+
 import styles from './AllTodoPage.module.css';
 
 const AllTodoPage = () => {
@@ -24,17 +23,9 @@ const AllTodoPage = () => {
 
   return (
     <div className={styles.container}>
-      <Header search={search} setSearch={setSearch} />
+      <Header search={search} setSearch={setSearch} setSelectedSort={setSelectedSort} />
 
       <Input setTodos={setTodos} />
-
-      <Selector
-        label={'Сортировка'}
-        selectorId={'sortingSelector'}
-        options={OPTIONS}
-        selected={selectedSort}
-        setSelected={setSelectedSort}
-      />
 
       <TodoList todos={todos} setTodos={setTodos} debouncedSearch={debouncedSearch} />
     </div>

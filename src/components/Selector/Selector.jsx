@@ -1,28 +1,23 @@
 import PropTypes from 'prop-types';
 import styles from './Selector.module.css';
-export const Selector = ({ label, selectorId, options, selected, setSelected }) => {
+import Select from 'react-select';
+
+export const Selector = ({ selectorId, options, setSelected }) => {
   return (
     <div className={styles.container}>
-      <label htmlFor={selectorId}>{label}</label>
-      <select
-        id={selectorId}
-        value={selected}
-        onChange={({ target }) => setSelected(target.value)}
-      >
-        {options.map(({ id, value, label }) => (
-          <option key={id} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
+      <Select
+        name={selectorId}
+        options={options}
+        defaultValue={options[0]}
+        onChange={({ newValue }) => setSelected(newValue)}
+      />
+      {/* {console.log(count++)} */}
     </div>
   );
 };
 
 Selector.propTypes = {
-  label: PropTypes.string,
   selectorId: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object),
-  selected: PropTypes.string,
   setSelected: PropTypes.func,
 };

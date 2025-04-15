@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
+import styles from './SearchBar.module.css';
 
 export const SearchBar = ({ search, setSearch }) => {
   return (
-    <input
-      type="text"
-      name="search"
-      value={search}
-      placeholder="Поиск..."
-      onChange={({ target }) => setSearch(target.value)}
-    />
+    <div className={styles.input}>
+      <input
+        type="text"
+        name="search"
+        value={search}
+        placeholder="Поиск..."
+        onChange={({ target }) => setSearch(target.value)}
+      />
+    </div>
   );
 };
 

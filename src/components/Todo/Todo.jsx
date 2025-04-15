@@ -3,9 +3,9 @@ import styles from './Todo.module.css';
 import { useState } from 'react';
 import { MdOutlineEdit, MdOutlineDelete, MdDone } from 'react-icons/md';
 import { Button } from 'components/Button/Button';
-import { useDeleteTodo } from 'hooks/useDeleteTodo';
-import { useCompleteTodo } from 'hooks/useCompleteTodo';
-import { useEditTodo } from 'hooks/useEditTodo';
+import { useDeleteTodo } from 'utils/deleteTodo';
+import { useCompleteTodo } from 'utils/completeTodo';
+import { useEditTodo } from 'utils/editTodo';
 
 export const Todo = ({ id, title, completed, setTodos }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -32,6 +32,7 @@ export const Todo = ({ id, title, completed, setTodos }) => {
 
         {isEditing ? (
           <input
+            className={styles.editTodo}
             type="text"
             name="edit-todo"
             value={text}
