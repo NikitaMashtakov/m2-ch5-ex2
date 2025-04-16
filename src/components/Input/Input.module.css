@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 5px 5px 5px 0;
+  gap: 10px;
+  border-bottom: 1px solid #1d1d1d;
 }
 .input {
   border: none;
@@ -10,5 +12,9 @@
   display: flex;
   flex: 1;
   font-size: 1.3rem;
-  border: 1px solid #1d1d1d;
+}
+
+.input:focus {
+  border: none;
+  outline: none;
 }

@@ -1,9 +1,13 @@
 .button {
-  width: 2rem;
-  height: 2rem;
   align-items: center;
   display: flex;
   justify-content: center;
   background: none;
-  border: 1px solid gray;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 5px;
+  width: max-content;
+  &:hover {
+    background-color: #d8d8d89c;
+  }
 }

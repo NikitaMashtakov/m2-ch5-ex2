@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styles from './Input.module.css';
 import PropTypes from 'prop-types';
-import { MdAdd } from 'react-icons/md';
 import { Button } from 'components/Button/Button';
 import { addTodo } from 'utils/addTodo';
 
@@ -34,8 +33,9 @@ export const Input = ({ setTodos }) => {
             onAddClick();
           }
         }}
+        style={{ border: '1px solid #ccc' }}
       >
-        <MdAdd />
+        Добавить
       </Button>
     </div>
   );

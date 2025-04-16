@@ -18,7 +18,7 @@ export const TodoList = ({ todos, setTodos, debouncedSearch }) => {
           />
         ))
       ) : (
-        <h2>Задач нет</h2>
+        <h2 className={styles.noTodos}>Задач нет</h2>
       )}
     </div>
   );

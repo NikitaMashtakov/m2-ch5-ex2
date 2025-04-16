@@ -6,6 +6,7 @@ export const Selector = ({ selectorId, options, setSelected }) => {
   return (
     <div className={styles.container}>
       <Select
+        styles={{ height: '38px' }}
         name={selectorId}
         options={options}
         defaultValue={options[0]}
