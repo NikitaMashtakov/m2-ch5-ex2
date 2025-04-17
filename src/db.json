@@ -1,34 +1,3 @@
 {
-  "todos": [
-    {
-      "title": "dsgs",
-      "completed": false,
-      "id": 1
-    },
-    {
-      "title": "dfsfdsfsfsf",
-      "completed": false,
-      "id": 2
-    },
-    {
-      "title": "321321313",
-      "completed": false,
-      "id": 3
-    },
-    {
-      "title": "aaaa",
-      "completed": false,
-      "id": 4
-    },
-    {
-      "title": "zzzz",
-      "completed": false,
-      "id": 5
-    },
-    {
-      "title": "fdfdssdfdsfdsfsfdsfdsfdsdfsfsfsfsdfdsfdfdssdfdsfdsfsfdsfdsfdsdfsfsfsfsdfdsfdfdssdfdsfdsfsfdsfdsfdsdfsfsfsfsdfdsfdfdssdfdsfdsfsfdsfdsfdsdfsfsfsfsdfdsdsds",
-      "completed": false,
-      "id": 6
-    }
-  ]
+  "todos": []
 }

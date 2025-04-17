@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import styles from './Input.module.css';
+import styles from './NewTodoInput.module.css';
 import PropTypes from 'prop-types';
 import { Button } from 'components/Button/Button';
 import { addTodo } from 'utils/addTodo';
 
-export const Input = ({ setTodos }) => {
+export const NewTodoInput = ({ setTodos }) => {
   const [text, setText] = useState('');
   const { add } = addTodo(setTodos, text);
 
@@ -40,6 +40,6 @@ export const Input = ({ setTodos }) => {
     </div>
   );
 };
-Input.propTypes = {
+NewTodoInput.propTypes = {
   setTodos: PropTypes.func,
 };

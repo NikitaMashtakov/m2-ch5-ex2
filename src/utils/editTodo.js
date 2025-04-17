@@ -3,6 +3,9 @@ export const useEditTodo = (title, text, setText, setIsEditing, setTodos) => {
     setIsEditing(true);
     setText(title);
   };
+  const cancelEdit = () => {
+    setIsEditing(false);
+  };
   const confirmEditTodo = (id) => {
     fetch(`http://localhost:3000/todos/${id}`, {
       method: 'PATCH',
@@ -17,5 +20,5 @@ export const useEditTodo = (title, text, setText, setIsEditing, setTodos) => {
         setIsEditing(false);
       });
   };
-  return { editTodo, confirmEditTodo };
+  return { editTodo, cancelEdit, confirmEditTodo };
 };

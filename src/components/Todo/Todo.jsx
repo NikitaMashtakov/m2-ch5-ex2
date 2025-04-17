@@ -14,13 +14,11 @@ export const Todo = ({ id, title, completed, setTodos }) => {
 
   const { deleteTodo } = useDeleteTodo(setTodos);
   const { completeTodo } = useCompleteTodo(completed, setTodos);
-  const { editTodo, confirmEditTodo } = useEditTodo(
-    title,
-    text,
-    setText,
-    setIsEditing,
-    setTodos,
-  );
+  const {
+    editTodo,
+    cancelEdit: cancelEditTodo,
+    confirmEditTodo,
+  } = useEditTodo(title, text, setText, setIsEditing, setTodos);
   useEffect(() => {
     if (isEditing) editInputRef.current.focus();
   }, [isEditing]);
@@ -43,9 +41,7 @@ export const Todo = ({ id, title, completed, setTodos }) => {
             name="edit-todo"
             value={text}
             onChange={({ target }) => setText(target.value)}
-            onBlur={() => {
-              editInputRef.current.focus();
-            }}
+            onBlur={() => editInputRef.current.focus()}
           />
         ) : (
           <label style={{ border: 'none', '&:hover': { border: '1px solid black' } }}>
@@ -53,28 +49,32 @@ export const Todo = ({ id, title, completed, setTodos }) => {
           </label>
         )}
       </div>
+
       <div className={styles.buttons}>
         {isEditing ? (
-          <Button onClick={() => confirmEditTodo(id)}>
+          <Button title={'Подтвердить'} onClick={() => confirmEditTodo(id)}>
             <MdDone size="20" fill="#00c700" />
           </Button>
         ) : (
-          <Button onClick={editTodo}>
+          <Button title={'Редактировать'} onClick={editTodo}>
             <MdOutlineEdit size="20" fill="#6a75fd" />
           </Button>
         )}
 
         <div className={styles.buttons}>
           {isEditing ? (
-            <Button onClick={() => setIsEditing(false)}>
+            <Button title={'Отмена'} onClick={cancelEditTodo}>
               <MdClose size="20" fill="#ff4e4e" />
             </Button>
           ) : (
             <Button
+              title={'Удалить'}
               onClick={() => deleteTodo(id)}
-              style={{
-                '& :hover': { border: ' 1px solid black' },
-              }}
+              style={
+                {
+                  // visibility: 'hidden',
+                }
+              }
             >
               <MdOutlineDelete size="20" fill="#ff4e4e" />
             </Button>

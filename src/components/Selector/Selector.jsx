@@ -10,9 +10,10 @@ export const Selector = ({ selectorId, options, setSelected }) => {
         name={selectorId}
         options={options}
         defaultValue={options[0]}
-        onChange={({ newValue }) => setSelected(newValue)}
+        onChange={({ value }) => {
+          setSelected(value);
+        }}
       />
-      {/* {console.log(count++)} */}
     </div>
   );
 };

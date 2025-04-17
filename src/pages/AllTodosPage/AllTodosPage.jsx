@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TodoList } from 'components/TodoList/TodoList';
-import { Input } from 'components/Input/Input';
+import { NewTodoInput } from 'components/NewTodoInput/NewTodoInput';
 import useDebouncedValue from 'hooks/useDebouncedValue';
 import { Header } from 'components/Header/Header';
 
@@ -25,7 +25,7 @@ const AllTodoPage = () => {
     <div className={styles.container}>
       <Header search={search} setSearch={setSearch} setSelectedSort={setSelectedSort} />
 
-      <Input setTodos={setTodos} />
+      <NewTodoInput setTodos={setTodos} />
 
       <TodoList todos={todos} setTodos={setTodos} debouncedSearch={debouncedSearch} />
     </div>

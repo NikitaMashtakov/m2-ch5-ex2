@@ -1,6 +1,6 @@
-import { SearchBar } from 'components/SearchBar/SearchBar';
 import PropTypes from 'prop-types';
 import styles from './Header.module.css';
+import { SearchBar } from 'components/SearchBar/SearchBar';
 import { Selector } from 'components/Selector/Selector';
 import { OPTIONS } from 'constants/sortingOptions';
 export const Header = ({ search, setSearch, setSelectedSort }) => {
